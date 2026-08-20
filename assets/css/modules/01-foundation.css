@@ -1,0 +1,183 @@
+/* ============================================================
+           全局重置 & 主题（v9.1 增强版）
+           核心改动：
+           1. 【v9.1】版本号更新，移除"一周年特别版"
+           2. 【v9.1】破产检测移至收盘时统一处理
+           3. 【v9.1】新增破产资助金机制（高级设置可调）
+           4. 【v9.1】移除"破产者"成就奖励
+           5. 【v9.1】新增"直接结束游戏"按钮
+           6. 【v9.1】帮助内容隐藏高级设置相关
+           7. 保留 :before 和 :hover 效果
+           8. 代码添加详细注释，方便后续 AI 维护
+           ============================================================ */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+        :root {
+            --primary-blue: #0d47a1;
+            --secondary-blue: #1976d2;
+            --accent-gold: #ffd700;
+            --success-green: #2e7d32;
+            --danger-red: #c62828;
+            --tech-purple: #7b1fa2;
+            --external-cyan: #00bcd4;
+            --blue-chip: #00695c;
+            --bg-dark: #0a1929;
+            --bg-card: #132f4c;
+            --bg-hover: #1e4976;
+            --text-primary: #e3f2fd;
+            --text-secondary: #90caf9;
+            --border-color: #2a5a8a;
+            --shadow-glow: 0 0 20px rgba(25, 118, 210, 0.3);
+            --radius: 12px;
+            --transition: all 0.25s ease;
+            --banner-z: 500;
+            --achievement-z: 600;
+            --dark-horse-color: #ff6f00;
+            --sentiment-bull: #66bb6a;
+            --sentiment-bear: #ef5350;
+            --bailout-gold: #ffb300;
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            background: linear-gradient(145deg, var(--bg-dark) 0%, #0d2137 100%);
+            color: var(--text-primary);
+            min-height: 100vh;
+            padding: 16px;
+            line-height: 1.5;
+            position: relative;
+        }
+        body.modal-open {
+            overflow: hidden;
+        }
+        .container {
+            max-width: 1060px;
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+
+        /* ===== 头部 ===== */
+        header {
+            text-align: center;
+            margin-bottom: 24px;
+            padding: 20px 24px;
+            background: linear-gradient(135deg, var(--bg-card), var(--bg-hover));
+            border-radius: var(--radius);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-glow);
+            position: relative;
+            overflow: hidden;
+            cursor: default;
+        }
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.06), transparent);
+            animation: shine 4s infinite;
+        }
+        @keyframes shine {
+            0%,
+            100% {
+                left: -100%;
+            }
+            50% {
+                left: 100%;
+            }
+        }
+        h1 {
+            color: var(--accent-gold);
+            font-size: 2.4rem;
+            margin-bottom: 4px;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.25);
+            position: relative;
+            z-index: 1;
+            letter-spacing: 1px;
+            transition: transform 0.2s;
+        }
+        h1:hover {
+            transform: scale(1.02);
+        }
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            position: relative;
+            z-index: 1;
+            opacity: 0.85;
+        }
+
+        /* ===== 健康游戏忠告 ===== */
+        #health-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.92);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(8px);
+            padding: 24px;
+            transition: opacity 0.5s;
+        }
+        #health-modal.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        .health-box {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 32px 28px;
+            max-width: 560px;
+            width: 100%;
+            border: 2px solid var(--accent-gold);
+            box-shadow: 0 0 60px rgba(255, 215, 0, 0.15);
+            text-align: center;
+            animation: modal-appear 0.4s ease-out;
+        }
+        .health-box h2 {
+            color: var(--accent-gold);
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+        .health-box .health-content {
+            color: var(--text-primary);
+            font-size: 1rem;
+            line-height: 1.8;
+            text-align: left;
+            padding: 0 8px;
+            margin-bottom: 20px;
+        }
+        .health-box .health-content .highlight {
+            color: var(--accent-gold);
+            font-weight: 700;
+        }
+        .health-box .health-footer {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            border-top: 1px solid var(--border-color);
+            padding-top: 16px;
+            margin-top: 8px;
+        }
+        .health-box .health-timer {
+            margin-top: 12px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            opacity: 0.7;
+        }
