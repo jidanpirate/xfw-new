@@ -1,0 +1,251 @@
+/* ===== 附加样式 ===== */
+        .dark-horse-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #ff6f00, #e65100);
+            color: #fff;
+            font-size: 0.6rem;
+            font-weight: 700;
+            padding: 1px 10px;
+            border-radius: 12px;
+            margin-left: 4px;
+            animation: horseGlow 1.2s infinite alternate;
+        }
+        @keyframes horseGlow {
+            0% {
+                box-shadow: 0 0 6px rgba(255, 111, 0, 0.3);
+            }
+            100% {
+                box-shadow: 0 0 18px rgba(255, 111, 0, 0.6);
+            }
+        }
+        .btn-predict {
+            background: linear-gradient(135deg, #6a1b9a, #4a148c);
+            color: #fff;
+            padding: 2px 12px;
+            font-size: 0.7rem;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            touch-action: manipulation;
+        }
+        .btn-predict:hover:not(:disabled) {
+            transform: scale(1.05);
+            box-shadow: 0 4px 16px rgba(106, 27, 154, 0.4);
+        }
+        .btn-predict:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+        .rating-badge {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 1px 10px;
+            border-radius: 12px;
+            margin-left: 4px;
+        }
+        .rating-S {
+            background: linear-gradient(135deg, #ffd700, #f9a825);
+            color: #1a1a1a;
+        }
+        .rating-A {
+            background: linear-gradient(135deg, #66bb6a, #2e7d32);
+            color: #fff;
+        }
+        .rating-B {
+            background: linear-gradient(135deg, #42a5f5, #0d47a1);
+            color: #fff;
+        }
+        .rating-C {
+            background: linear-gradient(135deg, #ffa726, #e65100);
+            color: #fff;
+        }
+        .rating-D {
+            background: var(--bg-dark);
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+        }
+        .bailout-section {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 4px;
+            gap: 6px;
+        }
+        .bankrupt-badge {
+            background: var(--danger-red);
+            color: #fff;
+            padding: 1px 10px;
+            border-radius: 12px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            margin-left: 4px;
+        }
+
+        /* ===== 响应式 ===== */
+        @media (max-width: 1200px) {
+            .container {
+                max-width: 100%;
+                padding: 0 16px;
+            }
+            .game-history {
+                right: 0;
+                top: 0;
+                width: 100%;
+                max-height: 45vh;
+                border-radius: 0;
+                border-left: none;
+                border-right: none;
+                transform: translateY(0);
+                opacity: 1;
+            }
+            .game-history.collapsed {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            #show-log-btn {
+                bottom: 16px;
+                right: 16px;
+                padding: 6px 14px;
+                font-size: 0.85rem;
+            }
+            #eai-overlay .eai-modal-box {
+                padding: 18px 16px;
+            }
+            #banner-container {
+                top: 10px;
+                right: 10px;
+                max-width: 340px;
+            }
+            .admin-achievement-grid {
+                grid-template-columns: 1fr;
+            }
+            .admin-stock-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        @media (max-width: 800px) {
+            .charts-container {
+                grid-template-columns: 1fr;
+            }
+            .players-container {
+                grid-template-columns: 1fr;
+            }
+            .game-controls {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+            .btn {
+                padding: 6px 14px;
+                font-size: 0.8rem;
+            }
+            h1 {
+                font-size: 1.6rem;
+            }
+            .results-content {
+                padding: 20px 16px;
+            }
+            .stock-control-row {
+                flex-wrap: wrap;
+                gap: 3px;
+            }
+            .stock-control-row .amt-group {
+                margin-left: 0;
+                width: 100%;
+                justify-content: flex-start;
+            }
+            .stock-control-row .action-group {
+                width: 100%;
+                justify-content: flex-start;
+            }
+            #eai-overlay .eai-modal-box {
+                padding: 14px 12px;
+            }
+            #eai-overlay .eai-content textarea {
+                min-height: 100px;
+            }
+            .game-setup {
+                padding: 20px 16px;
+            }
+            .achievement-grid {
+                grid-template-columns: 1fr;
+            }
+            #banner-container {
+                max-width: calc(100% - 20px);
+                top: 8px;
+                right: 10px;
+            }
+            .banner-message {
+                padding: 10px 12px;
+                font-size: 0.8rem;
+            }
+            .admin-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .admin-row label {
+                min-width: auto;
+            }
+            .admin-row input,
+            .admin-row select {
+                width: 100%;
+            }
+            .admin-stock-item .stock-row .name-input {
+                width: 80px;
+            }
+            .admin-stock-item .stock-row input {
+                width: 56px;
+            }
+            .help-content {
+                padding: 18px 14px;
+            }
+            .stock-info-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        @media (max-width: 480px) {
+            .player-stats {
+                grid-template-columns: 1fr;
+            }
+            .game-info {
+                grid-template-columns: 1fr 1fr;
+            }
+            .info-item {
+                padding: 10px 12px;
+            }
+            .info-value {
+                font-size: 1rem;
+            }
+            .external-ai-card .eai-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .external-ai-card .eai-row .eai-api-config input {
+                min-width: 60px;
+            }
+            .admin-tabs button {
+                font-size: 0.7rem;
+                padding: 3px 10px;
+            }
+            .health-box {
+                padding: 24px 18px;
+            }
+            .health-box h2 {
+                font-size: 1.4rem;
+            }
+            .stock-info-grid {
+                grid-template-columns: 1fr;
+            }
+            .help-content {
+                padding: 14px 10px;
+            }
+            .decision-area {
+                gap: 6px;
+            }
+            .btn-decision,
+            .btn-cancel-decision {
+                padding: 4px 12px;
+                font-size: 0.75rem;
+            }
+        }

@@ -1,0 +1,499 @@
+/* ===== 游戏信息 ===== */
+        .game-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 14px;
+            margin-bottom: 20px;
+        }
+        .info-item {
+            background: var(--bg-card);
+            padding: 14px 16px;
+            border-radius: var(--radius);
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        .info-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 100%;
+            background: var(--secondary-blue);
+        }
+        .info-item:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-glow);
+        }
+        .info-item h3 {
+            color: var(--accent-gold);
+            margin-bottom: 4px;
+            font-size: 0.8rem;
+            letter-spacing: 0.3px;
+        }
+        .info-value {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+        .info-item p {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-top: 2px;
+        }
+        .bank-warning {
+            color: #ef5350;
+            font-weight: 700;
+            animation: pulse 1.4s infinite;
+            margin-top: 4px;
+            font-size: 0.8rem;
+            display: none;
+        }
+        @keyframes pulse {
+            0%,
+            100% {
+                opacity: 0.7;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+
+        /* ===== 玩家卡片 ===== */
+        .players-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            gap: 18px;
+            margin-bottom: 20px;
+        }
+        .player-card {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            padding: 16px 18px 18px;
+            border: 2px solid var(--border-color);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        .player-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--secondary-blue), var(--accent-gold));
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .player-card:hover::before {
+            opacity: 1;
+        }
+        .player-card.active {
+            border-color: var(--accent-gold);
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.2);
+        }
+        .player-card.ai-player {
+            border-color: var(--tech-purple);
+        }
+        .player-card.external-player {
+            border-color: var(--external-cyan);
+        }
+        .player-card.bankrupt {
+            opacity: 0.5;
+            background: linear-gradient(135deg, #3e1a1a, #2a1010);
+            border-color: var(--danger-red);
+        }
+        .player-card.decision-done {
+            border-color: var(--success-green);
+            background: rgba(46, 125, 50, 0.08);
+        }
+        .player-card.decision-done .player-name {
+            color: var(--success-green);
+        }
+        .player-card.decision-done .player-total {
+            color: var(--text-secondary);
+        }
+        .player-card.decision-done .decision-status {
+            color: var(--success-green);
+            font-weight: 700;
+        }
+
+        .player-card.decision-idle,
+        .player-card.decision-waiting {
+            background: rgba(0, 0, 0, 0.30) !important;
+            border-color: rgba(255, 255, 255, 0.06) !important;
+            box-shadow: none !important;
+        }
+        .player-card.decision-idle *,
+        .player-card.decision-waiting * {
+            opacity: 0.40 !important;
+            pointer-events: none !important;
+            transition: opacity 0.3s ease;
+        }
+        .player-card.decision-idle .decision-area,
+        .player-card.decision-waiting .decision-area {
+            pointer-events: auto !important;
+            opacity: 1 !important;
+        }
+        .player-card.decision-idle .decision-area .btn-decision {
+            opacity: 1 !important;
+            pointer-events: auto !important;
+            cursor: pointer !important;
+            box-shadow: 0 0 24px rgba(25, 118, 210, 0.50) !important;
+            transform: scale(1.04);
+            transition: all 0.25s ease;
+            position: relative;
+            z-index: 2;
+        }
+        .player-card.decision-idle .decision-area .btn-decision:hover {
+            box-shadow: 0 0 44px rgba(25, 118, 210, 0.75) !important;
+            transform: scale(1.10) !important;
+        }
+        .player-card.decision-idle .decision-area .btn-decision:active {
+            transform: scale(0.94) !important;
+        }
+        .player-card.decision-waiting .decision-area .btn-decision {
+            opacity: 0.40 !important;
+            pointer-events: none !important;
+            cursor: default !important;
+            transform: none !important;
+            box-shadow: none !important;
+        }
+        .player-card.decision-idle .decision-area .decision-status,
+        .player-card.decision-waiting .decision-area .decision-status {
+            opacity: 0.40 !important;
+            pointer-events: none !important;
+        }
+
+        .player-card.decision-active {
+            border-color: var(--accent-gold);
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.25);
+        }
+        .player-card.decision-active * {
+            opacity: 1 !important;
+            pointer-events: auto !important;
+        }
+
+        .player-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border-color);
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+        .player-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+        .player-total {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--accent-gold);
+        }
+        .ai-badge {
+            background: linear-gradient(135deg, var(--tech-purple), #9c27b0);
+            color: #fff;
+            padding: 2px 10px;
+            border-radius: 16px;
+            font-size: 0.65rem;
+            font-weight: 600;
+        }
+        .external-badge {
+            background: var(--external-cyan);
+            color: #0a1929;
+            padding: 2px 10px;
+            border-radius: 16px;
+            font-size: 0.65rem;
+            font-weight: 700;
+        }
+        .player-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2px 12px;
+            margin-bottom: 6px;
+            font-size: 0.85rem;
+        }
+        .player-stats .stat-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 2px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        }
+        .player-stats .stat-row .label {
+            color: var(--text-secondary);
+        }
+        .player-stats .stat-row .value {
+            font-weight: 600;
+        }
+        .player-stats .stat-row .profit {
+            color: #81c784;
+        }
+        .player-stats .stat-row .loss {
+            color: #e57373;
+        }
+        .stock-a-color {
+            color: #81c784;
+        }
+        .stock-b-color {
+            color: #e57373;
+        }
+        .stock-c-color {
+            color: #ce93d8;
+        }
+        .stock-d-color {
+            color: #4db6ac;
+        }
+        .stock-custom-color {
+            color: #ffb74d;
+        }
+        .invest-section {
+            margin-top: 10px;
+            border-top: 1px solid var(--border-color);
+            padding-top: 10px;
+        }
+        .invest-section .section-label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .stock-control-row {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 6px;
+            background: var(--bg-dark);
+            border-radius: 8px;
+            margin-bottom: 4px;
+            flex-wrap: wrap;
+        }
+        .stock-control-row .sname {
+            font-weight: 600;
+            font-size: 0.8rem;
+            min-width: 40px;
+        }
+        .stock-control-row .sname .badge {
+            font-size: 0.55rem;
+            padding: 1px 6px;
+            border-radius: 10px;
+            font-weight: 500;
+            margin-left: 3px;
+        }
+        .badge-a {
+            background: rgba(46, 125, 50, 0.3);
+            color: #81c784;
+        }
+        .badge-b {
+            background: rgba(198, 40, 40, 0.3);
+            color: #e57373;
+        }
+        .badge-c {
+            background: rgba(123, 31, 162, 0.3);
+            color: #ce93d8;
+        }
+        .badge-d {
+            background: rgba(0, 105, 92, 0.3);
+            color: #4db6ac;
+        }
+        .badge-custom {
+            background: rgba(255, 183, 77, 0.25);
+            color: #ffb74d;
+        }
+        .stock-control-row .amt-group {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+            margin-left: auto;
+        }
+        .stock-control-row .amt-group input {
+            width: 56px;
+            height: 26px;
+            text-align: center;
+            background: var(--bg-dark);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            border-radius: 5px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 0 2px;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+        .stock-control-row .amt-group input:focus {
+            border-color: var(--accent-gold);
+            outline: none;
+        }
+        .stock-control-row .amt-group input::placeholder {
+            color: rgba(144, 202, 249, 0.3);
+            font-weight: 400;
+            font-size: 0.65rem;
+        }
+        .stock-control-row .amt-group button {
+            width: 24px;
+            height: 24px;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 0.8rem;
+            transition: var(--transition);
+            line-height: 1;
+            background: linear-gradient(135deg, #1976d2, #0d47a1);
+            touch-action: manipulation;
+        }
+        .stock-control-row .amt-group button:hover {
+            transform: scale(1.05);
+        }
+        .stock-control-row .action-group {
+            display: flex;
+            gap: 3px;
+            flex-wrap: wrap;
+        }
+        .stock-control-row .action-group .btn-sm {
+            touch-action: manipulation;
+        }
+        .btn-sm-max {
+            background: linear-gradient(135deg, #ff8f00, #e65100);
+            padding: 3px 8px;
+            font-size: 0.65rem;
+            border-radius: 5px;
+            color: #fff;
+            font-weight: 700;
+            touch-action: manipulation;
+        }
+        .btn-sm-max:hover:not(:disabled) {
+            box-shadow: 0 4px 12px rgba(255, 143, 0, 0.4);
+            transform: scale(1.05);
+        }
+        .ai-think {
+            color: #ce93d8;
+            font-style: italic;
+            font-size: 0.75rem;
+            padding: 4px 8px;
+            background: rgba(123, 31, 162, 0.12);
+            border-radius: 6px;
+            border-left: 2px solid var(--tech-purple);
+            margin-top: 4px;
+            min-height: 28px;
+            transition: var(--transition);
+        }
+        .ai-think .think-timer {
+            font-weight: 700;
+            color: var(--accent-gold);
+        }
+        .external-think {
+            color: var(--external-cyan);
+            font-style: italic;
+            font-size: 0.75rem;
+            padding: 4px 8px;
+            background: rgba(0, 188, 212, 0.08);
+            border-radius: 6px;
+            border-left: 2px solid var(--external-cyan);
+            margin-top: 4px;
+        }
+
+        /* ===== 决策按钮区域 ===== */
+        .decision-area {
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .decision-status {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            padding: 4px 12px;
+            border-radius: 20px;
+            background: var(--bg-dark);
+            border: 1px solid var(--border-color);
+        }
+        .decision-status.done {
+            color: var(--success-green);
+            border-color: var(--success-green);
+            background: rgba(46, 125, 50, 0.12);
+        }
+        .decision-status.waiting {
+            color: var(--text-secondary);
+            opacity: 0.6;
+        }
+        .decision-status.active {
+            color: var(--accent-gold);
+            border-color: var(--accent-gold);
+            background: rgba(255, 215, 0, 0.08);
+        }
+        .btn-cancel-decision {
+            background: linear-gradient(135deg, #e53935, #b71c1c);
+            color: #fff;
+            padding: 6px 16px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            touch-action: manipulation;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        .btn-cancel-decision:hover:not(:disabled) {
+            transform: scale(1.04);
+            box-shadow: 0 4px 16px rgba(198, 40, 40, 0.4);
+        }
+        .btn-cancel-decision:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+        .btn-decision {
+            background: linear-gradient(135deg, #1976d2, #0d47a1);
+            color: #fff;
+            padding: 6px 20px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            touch-action: manipulation;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        .btn-decision:hover:not(:disabled) {
+            transform: scale(1.04);
+            box-shadow: 0 4px 16px rgba(25, 118, 210, 0.4);
+        }
+        .btn-decision:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+        .btn-decision.btn-done {
+            background: linear-gradient(135deg, #388e3c, #1b5e20);
+        }
+        .btn-decision.btn-done:hover:not(:disabled) {
+            box-shadow: 0 4px 16px rgba(46, 125, 50, 0.4);
+        }

@@ -1,0 +1,282 @@
+/* ===== 帮助模态框（v9.1 隐藏高级设置相关内容） ===== */
+        .help-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 1001;
+            justify-content: center;
+            align-items: center;
+            overflow-y: auto;
+            padding: 16px;
+            backdrop-filter: blur(6px);
+        }
+        .help-content {
+            background: var(--bg-card);
+            padding: 24px 28px;
+            border-radius: var(--radius);
+            max-width: 780px;
+            width: 100%;
+            max-height: 88vh;
+            overflow-y: auto;
+            border: 2px solid var(--accent-gold);
+            -webkit-overflow-scrolling: touch;
+            box-shadow: 0 0 60px rgba(255, 215, 0, 0.08);
+        }
+        .help-content h2 {
+            color: var(--accent-gold);
+            margin-bottom: 18px;
+            text-align: center;
+            font-size: 1.8rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 12px;
+        }
+        .help-section {
+            margin-bottom: 18px;
+        }
+        .help-section h3 {
+            color: var(--accent-gold);
+            margin-bottom: 6px;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .help-section p,
+        .help-section li {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.7;
+        }
+        .help-section ul {
+            padding-left: 20px;
+            margin: 4px 0;
+        }
+        .help-section li {
+            list-style: disc;
+        }
+        .help-section .highlight {
+            color: var(--accent-gold);
+            font-weight: 600;
+        }
+        .help-section .danger {
+            color: #ef5350;
+            font-weight: 600;
+        }
+        .help-section .success {
+            color: #81c784;
+            font-weight: 600;
+        }
+        .help-section .info {
+            color: var(--external-cyan);
+            font-weight: 600;
+        }
+        .stock-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 8px;
+            margin-top: 6px;
+        }
+        .stock-info-card {
+            padding: 10px 12px;
+            border-radius: 8px;
+            border: 1px solid;
+            font-size: 0.8rem;
+        }
+        .stock-info-card h4 {
+            color: var(--text-primary);
+            margin-bottom: 2px;
+        }
+        .stock-info-card p {
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+            margin: 0;
+        }
+        .stock-info-a {
+            border-color: var(--success-green);
+            background: rgba(46, 125, 50, 0.08);
+        }
+        .stock-info-b {
+            border-color: var(--danger-red);
+            background: rgba(198, 40, 40, 0.08);
+        }
+        .stock-info-c {
+            border-color: var(--tech-purple);
+            background: rgba(123, 31, 162, 0.08);
+        }
+        .stock-info-d {
+            border-color: var(--blue-chip);
+            background: rgba(0, 105, 92, 0.08);
+        }
+        .help-rule-box {
+            background: var(--bg-dark);
+            border-radius: 8px;
+            padding: 10px 14px;
+            margin: 4px 0 8px 0;
+            border-left: 3px solid var(--accent-gold);
+        }
+        .help-copy-row {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 12px;
+            flex-wrap: wrap;
+        }
+
+        /* ===== 存档码 ===== */
+        .code-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1100;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(4px);
+            padding: 16px;
+        }
+        .code-modal-content {
+            background: var(--bg-card);
+            padding: 24px 28px;
+            border-radius: var(--radius);
+            max-width: 520px;
+            width: 92%;
+            border: 2px solid var(--border-color);
+        }
+        .code-modal-content h3 {
+            color: var(--accent-gold);
+            margin-bottom: 12px;
+            text-align: center;
+        }
+        .code-modal-content textarea {
+            width: 100%;
+            padding: 8px 10px;
+            background: var(--bg-dark);
+            border: 2px solid var(--border-color);
+            color: var(--text-primary);
+            border-radius: 8px;
+            font-size: 0.8rem;
+            resize: vertical;
+            min-height: 60px;
+            font-family: monospace;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+        .code-modal-content textarea:focus {
+            border-color: var(--accent-gold);
+            outline: none;
+        }
+        .code-modal-content .btn-row {
+            display: flex;
+            gap: 8px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* ===== 密码 ===== */
+        .password-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.75);
+            z-index: 2001;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(4px);
+            padding: 16px;
+        }
+        .password-box {
+            background: var(--bg-card);
+            padding: 24px 28px;
+            border-radius: var(--radius);
+            max-width: 360px;
+            width: 92%;
+            border: 2px solid var(--accent-gold);
+            text-align: center;
+        }
+        .password-box h3 {
+            color: var(--accent-gold);
+            margin-bottom: 14px;
+        }
+        .password-box input {
+            width: 100%;
+            padding: 10px 14px;
+            background: var(--bg-dark);
+            border: 2px solid var(--border-color);
+            color: var(--text-primary);
+            border-radius: 8px;
+            font-size: 1rem;
+            margin-bottom: 14px;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+        .password-box input:focus {
+            border-color: var(--accent-gold);
+            outline: none;
+        }
+        .password-box .btn-row {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        /* ===== 保存通知 ===== */
+        .save-notification {
+            position: fixed;
+            top: 16px;
+            right: 16px;
+            padding: 10px 20px;
+            background: var(--bg-card);
+            border-radius: 10px;
+            border: 1px solid var(--success-green);
+            color: #81c784;
+            z-index: 2000;
+            animation: slide-in 0.3s ease-out;
+            display: none;
+            font-weight: 600;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+        }
+        @keyframes slide-in {
+            from {
+                opacity: 0;
+                transform: translateX(80px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* ===== v9.1 底部 ===== */
+        .version {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            opacity: 0.5;
+        }
+
+        /* ===== 滚动条 ===== */
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-dark);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary-blue);
+        }

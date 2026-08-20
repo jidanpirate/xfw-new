@@ -1,0 +1,427 @@
+/* ===== 设置面板 ===== */
+        .game-setup {
+            background: var(--bg-card);
+            padding: 28px 32px;
+            border-radius: var(--radius);
+            margin-bottom: 24px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+            max-width: 820px;
+            margin-left: auto;
+            margin-right: auto;
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+        .game-setup:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 44px rgba(0, 0, 0, 0.55);
+        }
+        .game-setup h2 {
+            color: var(--accent-gold);
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 1.6rem;
+        }
+        .setup-item {
+            margin-bottom: 16px;
+        }
+        .setup-item label {
+            display: block;
+            margin-bottom: 6px;
+            color: var(--text-primary);
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        .setup-item input[type="number"],
+        .setup-item input[type="text"] {
+            width: 100%;
+            padding: 10px 14px;
+            background: var(--bg-dark);
+            border: 2px solid var(--border-color);
+            color: var(--text-primary);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: var(--transition);
+            -webkit-appearance: none;
+            appearance: none;
+        }
+        .setup-item input:focus {
+            outline: none;
+            border-color: var(--accent-gold);
+            box-shadow: 0 0 12px rgba(255, 215, 0, 0.15);
+        }
+        .setup-note {
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            margin-top: 4px;
+            font-style: italic;
+            opacity: 0.7;
+        }
+
+        /* ===== 管理员面板 ===== */
+        .admin-panel {
+            background: rgba(123, 31, 162, 0.12);
+            border: 1px solid var(--tech-purple);
+            border-radius: 10px;
+            padding: 16px;
+            margin-top: 16px;
+            display: none;
+            max-height: 600px;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        .admin-panel h3 {
+            color: var(--tech-purple);
+            margin-bottom: 12px;
+            font-size: 1.1rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 6px;
+        }
+        .admin-tabs {
+            display: flex;
+            gap: 4px;
+            flex-wrap: wrap;
+            margin-bottom: 12px;
+        }
+        .admin-tabs button {
+            background: var(--bg-dark);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            padding: 4px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: var(--transition);
+            touch-action: manipulation;
+        }
+        .admin-tabs button.active {
+            border-color: var(--tech-purple);
+            color: #fff;
+            background: rgba(123, 31, 162, 0.2);
+        }
+        .admin-tabs button:hover {
+            border-color: var(--tech-purple);
+            color: #fff;
+        }
+        .admin-tab-content {
+            display: none;
+        }
+        .admin-tab-content.active {
+            display: block;
+        }
+        .admin-row {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 8px;
+            align-items: center;
+        }
+        .admin-row label {
+            flex: 1;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 140px;
+        }
+        .admin-row input,
+        .admin-row select {
+            width: 100px;
+            padding: 4px 8px;
+            background: var(--bg-dark);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            border-radius: 5px;
+            font-size: 0.85rem;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+        .admin-row select option {
+            background: var(--bg-dark);
+        }
+        .admin-row .wide {
+            width: 160px;
+        }
+        /* v9.1: 高级设置 - 破产资助金与破产阈值 */
+        .admin-bankruptcy-section {
+            background: rgba(255, 179, 0, 0.06);
+            border: 1px solid var(--bailout-gold);
+            border-radius: 8px;
+            padding: 10px 14px;
+            margin: 6px 0 10px 0;
+        }
+        .admin-bankruptcy-section .section-label {
+            color: var(--bailout-gold);
+            font-weight: 700;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 6px;
+        }
+        .admin-bankruptcy-section .admin-row label {
+            min-width: 120px;
+        }
+        .admin-bankruptcy-section .admin-row input {
+            width: 80px;
+        }
+        .admin-achievement-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px 16px;
+            margin: 6px 0 12px 0;
+        }
+        .admin-achievement-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 4px 6px;
+            background: var(--bg-dark);
+            border-radius: 4px;
+            font-size: 0.8rem;
+            gap: 6px;
+        }
+        .admin-achievement-item span {
+            color: var(--text-secondary);
+            white-space: nowrap;
+        }
+        .admin-achievement-item input {
+            width: 60px;
+            padding: 2px 4px;
+            background: var(--bg-dark);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            border-radius: 4px;
+            font-size: 0.8rem;
+            text-align: center;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+        .admin-stock-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px 16px;
+            margin: 6px 0 12px 0;
+        }
+        .admin-stock-item {
+            display: flex;
+            flex-direction: column;
+            padding: 6px 8px;
+            background: var(--bg-dark);
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            gap: 4px;
+        }
+        .admin-stock-item .stock-label {
+            font-weight: 700;
+            font-size: 0.85rem;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .admin-stock-item .stock-label .color-dot {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+        .admin-stock-item .stock-row {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .admin-stock-item .stock-row label {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 3px;
+        }
+        .admin-stock-item .stock-row input {
+            width: 64px;
+            padding: 2px 4px;
+            background: var(--bg-dark);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            border-radius: 4px;
+            font-size: 0.75rem;
+            text-align: center;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+        .admin-stock-item .stock-row input:focus {
+            border-color: var(--accent-gold);
+            outline: none;
+        }
+        .admin-stock-item .stock-row .name-input {
+            width: 100px;
+            text-align: left;
+            padding: 2px 6px;
+        }
+        .admin-chart-style {
+            margin: 6px 0 12px 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            background: var(--bg-dark);
+            padding: 8px 12px;
+            border-radius: 6px;
+        }
+        .admin-chart-style label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .admin-chart-style select {
+            background: var(--bg-dark);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            border-radius: 5px;
+            padding: 4px 10px;
+            font-size: 0.85rem;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        /* ===== 外接AI配置 ===== */
+        .external-ai-section {
+            margin-top: 16px;
+            padding-top: 14px;
+            border-top: 2px solid var(--border-color);
+        }
+        .external-ai-section .section-title {
+            color: var(--external-cyan);
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .external-ai-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        .external-ai-card {
+            background: var(--bg-dark);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 12px 14px;
+            transition: var(--transition);
+        }
+        .external-ai-card:hover {
+            border-color: var(--external-cyan);
+            box-shadow: 0 0 20px rgba(0, 188, 212, 0.08);
+        }
+        .external-ai-card .eai-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 6px;
+        }
+        .external-ai-card .eai-name {
+            font-weight: 700;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .external-ai-card .eai-name .eai-badge {
+            background: var(--external-cyan);
+            color: #0a1929;
+            font-size: 0.6rem;
+            font-weight: 700;
+            padding: 1px 10px;
+            border-radius: 12px;
+            letter-spacing: 0.3px;
+        }
+        .external-ai-card .eai-remove {
+            background: rgba(198, 40, 40, 0.15);
+            border: 1px solid var(--danger-red);
+            color: var(--danger-red);
+            padding: 2px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.75rem;
+            font-weight: 600;
+            transition: var(--transition);
+            touch-action: manipulation;
+        }
+        .external-ai-card .eai-remove:hover {
+            background: var(--danger-red);
+            color: #fff;
+        }
+        .external-ai-card .eai-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            align-items: center;
+            margin-top: 4px;
+        }
+        .external-ai-card .eai-row label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .external-ai-card .eai-row input,
+        .external-ai-card .eai-row select {
+            background: var(--bg-dark);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            border-radius: 5px;
+            padding: 3px 8px;
+            font-size: 0.8rem;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+        .external-ai-card .eai-row input:focus,
+        .external-ai-card .eai-row select:focus {
+            border-color: var(--external-cyan);
+            outline: none;
+        }
+        .external-ai-card .eai-row .eai-api-config {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            align-items: center;
+            margin-top: 4px;
+            width: 100%;
+        }
+        .external-ai-card .eai-row .eai-api-config input {
+            flex: 1;
+            min-width: 100px;
+        }
+        .external-ai-card .eai-status {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-top: 4px;
+            opacity: 0.7;
+        }
+        .btn-add-eai {
+            background: transparent;
+            border: 2px dashed var(--external-cyan);
+            color: var(--external-cyan);
+            padding: 8px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            width: 100%;
+            font-size: 0.9rem;
+            touch-action: manipulation;
+        }
+        .btn-add-eai:hover {
+            background: rgba(0, 188, 212, 0.08);
+            border-style: solid;
+        }
