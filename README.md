@@ -7,9 +7,14 @@
 
 ## 运行方式
 
-直接用浏览器打开 [index.html](index.html) 即可运行。
+由于浏览器最新的安全设置，浏览器无法直接打开 [index.html](index.html) 运行。
 
-也可以在 VS Code 中使用 Live Server 等静态文件服务器打开 `index.html`。项目不需要构建工具或安装依赖。
+建议游玩方式：
+- VS Code 插件 Live Server：右键 `index.html` → Open with Live Server
+- Python：`python -m http.server 8080` → 访问 `http://localhost:8080`
+- Node.js：`npx serve .` → 访问 `http://localhost:3000`
+- 访问[这里](https://aka.doubaocdn.com/s/SbITktuct7)游玩（后续将不再更新）
+- 游玩[旧版](old_edition.html)(后续将不再更新）
 
 
 
