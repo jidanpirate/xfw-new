@@ -13,7 +13,7 @@
 - VS Code 插件 Live Server：右键 `index.html` → Open with Live Server
 - Python：`python -m http.server 8080` → 访问 `http://localhost:8080`
 - Node.js：`npx serve .` → 访问 `http://localhost:3000`
-- 访问[这里](https://aka.doubaocdn.com/s/SbITktuct7)游玩（后续将不再更新）
+- 访问[这里](jidanpirate.github.com)游玩
 - 游玩[旧版](old_edition.html)(后续将不再更新）
 
 
