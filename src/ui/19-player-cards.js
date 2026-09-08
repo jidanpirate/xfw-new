@@ -62,8 +62,12 @@
             if (isHuman && !p.bankrupt && gameActive) {
                 let alreadyPred = !!predictionsThisRound[p.id];
                 let disabled = alreadyPred || decisionState !== 'deciding' || decidingPlayerId !== p.id;
+                let isMyTurn = (decisionState === 'deciding' && decidingPlayerId === p.id);
+                // v9.2: 已预测时提供「撤销预测」按钮，可单独退回押金
+                let undoBtn = (alreadyPred && isMyTurn) ?
+                    `<button class="btn-undo-predict" id="undo-predict-btn-${p.id}" title="撤销本轮预测并退还押金">↩️ 撤销</button>` : '';
                 predictBtn =
-                    `<button class="btn-predict" id="predict-btn-${p.id}" ${disabled ? 'disabled' : ''}>🔮 ${alreadyPred ? '已预测' : '预测'}</button>`;
+                    `<button class="btn-predict" id="predict-btn-${p.id}" ${disabled ? 'disabled' : ''}>🔮 ${alreadyPred ? '已预测' : '预测'}</button>${undoBtn}`;
             }
 
             // v9.1: 破产救助按钮（已由收盘自动处理，但保留手动救助作为备选）
@@ -215,6 +219,14 @@
                     } else {
                         showBanner('只有正在决策的玩家可以预测', 'warning', null, '⚠️ 操作无效');
                     }
+                };
+            }
+            // v9.2: 撤销预测按钮
+            let undoPredBtn = document.getElementById(`undo-predict-btn-${p.id}`);
+            if (undoPredBtn) {
+                undoPredBtn.onclick = function(e) {
+                    e.stopPropagation();
+                    undoPrediction(p.id);
                 };
             }
 
