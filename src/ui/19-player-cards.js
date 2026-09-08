@@ -31,14 +31,17 @@
                 let cls = `stock-${s.toLowerCase()}-color`;
                 let isDark = currentDarkHorse && currentDarkHorse.key === s;
                 let darkTag = isDark ? ' 🐴' : '';
+                // v9.3: 被封股票显示跑路标签
+                let sealedTag = isStockSealed(s) ? ' 🚫跑路' : '';
                 let mult = stocks[s].recentMultiplier || 1;
                 let profit = Math.round(shares * price * (mult - 1));
                 let profitText = '';
-                if (profit !== 0) {
+                if (profit !== 0 && !isStockSealed(s)) {
                     let cls2 = profit > 0 ? 'profit' : 'loss';
                     profitText = `<span class="${cls2}">${profit>0?'+':''}${fmt(profit)}</span>`;
                 }
-                return `<div class="stat-row"><span class="label ${cls}">${stocks[s].name}${darkTag}</span><span class="value">${shares}股 (${fmt(val)}) ${profitText}</span></div>`;
+                let valText = isStockSealed(s) ? '已清零' : `${shares}股 (${fmt(val)})`;
+                return `<div class="stat-row"><span class="label ${cls}">${stocks[s].name}${darkTag}${sealedTag}</span><span class="value">${valText} ${profitText}</span></div>`;
             }).join('');
 
             let customRows = '';
@@ -84,10 +87,14 @@
                     let cls = `stock-${s.toLowerCase()}-color`;
                     let isDark = currentDarkHorse && currentDarkHorse.key === s;
                     let darkTag = isDark ? ' 🐴' : '';
+                    // v9.3: 被封股票全部禁用
+                    let sealed = isStockSealed(s);
+                    let sealedTag = sealed ? ' 🚫已跑路' : '';
                     let price = stocks[s].price;
-                    let disabled = decisionState !== 'deciding' || decidingPlayerId !== p.id;
-                    return `<div class="stock-control-row">
-                            <span class="sname ${cls}">${stocks[s].name}${darkTag} <span class="badge badge-${s.toLowerCase()}">${s==='A'?'成长':s==='B'?'周期':s==='C'?'科技':'蓝筹'}</span> (${fmt(price)})</span>
+                    let disabled = sealed || decisionState !== 'deciding' || decidingPlayerId !== p.id;
+                    let priceText = sealed ? '暂停交易' : `(${fmt(price)})`;
+                    return `<div class="stock-control-row" style="${sealed ? 'opacity:0.55;' : ''}">
+                            <span class="sname ${cls}">${stocks[s].name}${darkTag}${sealedTag} <span class="badge badge-${s.toLowerCase()}">${s==='A'?'成长':s==='B'?'周期':s==='C'?'科技':'蓝筹'}</span> ${priceText}</span>
                             <div class="amt-group">
                                 <button class="dec-stock" data-stock="${s}" data-pid="${p.id}" ${disabled ? 'disabled' : ''}>−</button>
                                 <input type="text" id="inv-${s}-${p.id}" placeholder="股数" autocomplete="off" ${disabled ? 'disabled' : ''}>
