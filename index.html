@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>小富翁股票投资游戏 v9.2</title>
+    <title>小富翁股票投资游戏 v9.3</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js">
     </script>
     <link rel="stylesheet" href="assets/css/style.css" />
@@ -31,7 +31,7 @@
         <!-- ===== 头部（v9.1 移除"一周年特别版"） ===== -->
         <header>
             <h1 id="main-title">
-                🏆 小富翁股票投资游戏 v9.2
+                🏆 小富翁股票投资游戏 v9.3
                 <!-- v9.1: 移除 "一周年特别版" 标签 -->
             </h1>
             <p class="subtitle">A股 · B股 · C股 · D股 · 自建股 · 彩票 · 外接AI · 成就 · 决策机制</p>
@@ -287,8 +287,8 @@
             </div>
         </div>
 
-        <div class="version">基氮实验室 版权所有 · v9.2</div>
-        <div class="version">版本号 v9.2</div>
+        <div class="version">基氮实验室 版权所有 · v9.3</div>
+        <div class="version">版本号 v9.3</div>
     </div>
 
     <!-- ===== 结果模态框 ===== -->
@@ -410,6 +410,18 @@
             </div>
 
             <div class="help-section">
+                <h3>🚫 股票跑路（v9.3）</h3>
+                <p>掠夺模式触发后，<span class="danger">下一轮</span>有 <span class="highlight">50% 概率</span>随机封掉一只股票（老板跑路）。</p>
+                <ul>
+                    <li>被封股票：所有玩家<span class="danger">持仓清零</span>，无法买卖、无法预测，价格冻结。</li>
+                    <li>银行仍告急时，下一轮继续 50% 概率封股，可能同时封多只。</li>
+                    <li><span class="highlight">4 轮后</span>该股票重新上市，价格重置为初始价（默认 ¥100）。</li>
+                    <li>⚠️ 之前投资的持仓<span class="danger">不会恢复</span>，损失由玩家自行承担。</li>
+                </ul>
+                <p style="font-size:0.8rem;color:var(--text-secondary);">示例：第 11 轮触发掠夺 → 第 12 轮封 A 股 → 第 16 轮 A 股重开（价格重置）。</p>
+            </div>
+
+            <div class="help-section">
                 <h3>🌐 外接AI</h3>
                 <p>支持接入 <span class="highlight">外部AI</span>（如 ChatGPT、Claude 等）代为决策。</p>
                 <ul>
@@ -481,7 +493,7 @@
     </div>
 
     <!-- ================================================================
-    JavaScript  —  v9.2 增强版
+    JavaScript  —  v9.3 增强版
     核心改动：
       1. 【v9.1】版本号更新为 v9.1，移除"一周年特别版"
       2. 【v9.1】破产检测移至收盘时统一处理
