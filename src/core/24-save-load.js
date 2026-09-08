@@ -14,6 +14,7 @@
                     assetsHistory,
                     stocksHistory,
                     logsByRound,
+                    roundHistory,
                     humanCount,
                     aiCount,
                     playerCount,
@@ -79,6 +80,7 @@
                 assetsHistory = state.assetsHistory || [];
                 stocksHistory = state.stocksHistory || [];
                 logsByRound = state.logsByRound || {};
+                roundHistory = state.roundHistory || [];
                 humanCount = state.humanCount;
                 aiCount = state.aiCount;
                 playerCount = state.playerCount;
@@ -145,6 +147,7 @@
                     assetsHistory,
                     stocksHistory,
                     logsByRound,
+                    roundHistory,
                     humanCount,
                     aiCount,
                     playerCount,
@@ -224,6 +227,7 @@
                 assetsHistory = state.assetsHistory || [];
                 stocksHistory = state.stocksHistory || [];
                 logsByRound = state.logsByRound || {};
+                roundHistory = state.roundHistory || [];
                 humanCount = state.humanCount;
                 aiCount = state.aiCount;
                 playerCount = state.playerCount;
