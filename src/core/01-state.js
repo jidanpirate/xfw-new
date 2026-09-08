@@ -16,6 +16,8 @@
         let logPanelVisible = true;
         // v9.2: 每轮历史快照（用于历史记录面板）
         let roundHistory = [];
+        // v9.3: 被封股票（跑路），key -> { sealedRound, recoverRound }
+        let sealedStocks = {};
 
         let externalAIConfigs = [];
 

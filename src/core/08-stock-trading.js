@@ -3,6 +3,11 @@
 
         function investStock(playerId, stockType, shares) {
             if (!gameActive) return;
+            // v9.3: 被封股票不能买入
+            if (isStockSealed(stockType)) {
+                showBanner(`${stocks[stockType].name} 已跑路，暂停交易`, 'error', null, '🚫 股票跑路');
+                return;
+            }
             let p = players[playerId];
             if (p.bankrupt) {
                 showBanner(`${p.name} 已破产，无法交易`, 'error', null, '💀 破产');
@@ -35,6 +40,11 @@
 
         function withdrawStock(playerId, stockType, shares) {
             if (!gameActive) return;
+            // v9.3: 被封股票不能卖出（持仓已在封的时候清零）
+            if (isStockSealed(stockType)) {
+                showBanner(`${stocks[stockType].name} 已跑路，暂停交易`, 'error', null, '🚫 股票跑路');
+                return;
+            }
             let p = players[playerId];
             if (p.bankrupt) {
                 showBanner(`${p.name} 已破产，无法交易`, 'error', null, '💀 破产');
