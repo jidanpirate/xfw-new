@@ -2,6 +2,31 @@
         //  持平阈值 1.5%，预测上涨/下跌但实际持平时押金没收
         // ================================================================
 
+        // v9.2: 撤销预测（仅限本轮、且该玩家正在决策时），退还押金并清除记录
+        function undoPrediction(playerId) {
+            let p = players[playerId];
+            if (!p || p.bankrupt) {
+                showBanner('您已破产，无法撤销预测', 'error', null, '🔮 撤销失败');
+                return;
+            }
+            if (!predictionsThisRound[playerId]) {
+                showBanner('本轮没有可撤销的预测', 'warning', null, '🔮 撤销失败');
+                return;
+            }
+            if (decisionState !== 'deciding' || decidingPlayerId !== playerId) {
+                showBanner('只有正在决策的玩家可以撤销预测', 'warning', null, '🔮 撤销失败');
+                return;
+            }
+            let pred = predictionsThisRound[playerId];
+            p.cash = Math.round(p.cash + pred.amount);
+            delete predictionsThisRound[playerId];
+            let dirText = pred.direction === 'up' ? '上涨📈' : pred.direction === 'down' ? '下跌📉' : '持平➖';
+            addLog(`↩️ ${p.name} 撤销了 ${pred.stock}股 ${dirText} 的预测，押金 ${fmt(pred.amount)} 已退还`, 'event');
+            showBanner(`↩️ 已撤销预测，押金 ${fmt(pred.amount)} 已退还`, 'info', null, '🔮 已撤销');
+            updateUI();
+            updatePlayersDisplay();
+        }
+
         function makePrediction(playerId, stockKey, direction, amount) {
             let p = players[playerId];
             if (!p || p.bankrupt) {
