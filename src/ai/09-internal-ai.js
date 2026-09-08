@@ -42,6 +42,23 @@
                 totalStockVal += holdings[k] * stocks[k].price;
             });
 
+            // v9.3: 即将破产时撤资保命（优先级最高）
+            let dangerLine = BANKRUPTCY_THRESHOLD * 8;
+            if (total < dangerLine && totalStockVal > 0) {
+                addLog(`🤖 ${player.name} 资产告急（${fmt(total)}），启动撤资保命`, 'warning');
+                let sortedByRisk = ['C', 'B', 'A', 'D'].filter(k => holdings[k] > 0)
+                    .sort((a, b) => (stockScores[a] || 0) - (stockScores[b] || 0));
+                for (let sk of sortedByRisk) {
+                    let sellShares = holdings[sk];
+                    if (sellShares > 0) {
+                        withdrawStock(player.id, sk, sellShares);
+                        addLog(`🤖 ${player.name} 撤资卖出${sk}股 ${sellShares}股（保命）`, 'loss');
+                    }
+                }
+                showBanner(`${player.name} 资产接近破产线，全部撤资保命`, 'warning', null, '🤖 AI决策');
+                return;
+            }
+
             let config = getStrategyConfig(strategy, marketData);
 
             // 止损止盈

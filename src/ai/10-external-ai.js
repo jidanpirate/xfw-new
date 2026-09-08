@@ -5,7 +5,7 @@
             let p = players[playerId];
             if (!p) return '错误：玩家不存在';
             let lines = [];
-            lines.push('=== 小富翁股票投资游戏 — 外接AI决策指令 v9.1 ===');
+            lines.push('=== 小富翁股票投资游戏 — 外接AI决策指令 v9.3 ===');
             lines.push('');
             lines.push('【游戏规则摘要】');
             lines.push('- 目标：总资产最高者获胜。总资产 = 现金 + 股票市值（股份数×股价） + 自建股投资');
@@ -26,7 +26,8 @@
             lines.push(`- 股票类型：${stockTypeParts.join('、')}`);
             lines.push('- 自建股：其他玩家创建的股票，您可投资（以金额计）');
             lines.push('- 彩票：每轮可购买，中奖获得奖金，但也有诈骗风险');
-            lines.push('- 银行资产低于阈值时将触发掠夺税');
+            lines.push('- 银行资产低于阈值时将触发掠夺税，掠夺后下一轮有50%概率随机封掉一只股票（老板跑路）');
+            lines.push('- 被封股票：持仓清零、无法买卖/预测、价格冻结；4轮后重开（价格重置，持仓不恢复）');
             if (currentDarkHorse) {
                 lines.push(`- 🐴 本轮黑马股：${currentDarkHorse.name}（涨跌幅倍率 ${DARK_HORSE_MULTIPLIER}x）`);
             } else {
@@ -67,6 +68,17 @@
             });
             lines.push(...stockStatus);
             lines.push(`  当前银行资产：${fmt(bankAssets)}${bankAssets < LOOT_THRESHOLD ? ' ⚠️ 低于掠夺阈值！' : '（安全）'}`);
+            let sealedKeys = Object.keys(sealedStocks || {});
+            if (sealedKeys.length > 0) {
+                let sealedInfo = sealedKeys.map(k => {
+                    let info = sealedStocks[k];
+                    let recoverRound = info ? info.recoverRound : '?';
+                    return `${k}股(第${recoverRound}轮恢复)`;
+                }).join('、');
+                lines.push(`  🚫 已跑路股票：${sealedInfo}（持仓已清零，无法交易/预测）`);
+            } else {
+                lines.push('  🚫 已跑路股票：无');
+            }
             lines.push('');
             lines.push('【自建股列表】');
             if (customStocks.length === 0) {
@@ -163,6 +175,8 @@
             lines.push('- 预测金额上限为总资产的5%');
             lines.push('- A股方向只能为 "up" 或 "hold"');
             lines.push('- 持平判定阈值：±1.5% 股价变化视为持平');
+            lines.push('- 🚫 已跑路（被封）股票无法买卖和预测，请勿对其发起操作');
+            lines.push('- 被封股票4轮后重开，价格重置为初始价，之前持仓不恢复');
             lines.push('- 创建自建股需要提供名称、上涨利率(1-80%)、留存比例(10-90%)');
             lines.push('- 请仅返回纯净JSON，不要包含任何其他文字');
             lines.push('');
