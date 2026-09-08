@@ -87,6 +87,14 @@
             if (playerDecisionStatus[playerId] !== 'done') {
                 playerDecisionStatus[playerId] = 'pending';
             }
+            // v9.2: 取消决策时回滚本轮已下的预测（退还押金并清除记录），
+            // 否则预测记录残留会导致取消后无法再次预测/决策
+            if (predictionsThisRound[playerId]) {
+                let pred = predictionsThisRound[playerId];
+                p.cash = Math.round(p.cash + pred.amount);
+                delete predictionsThisRound[playerId];
+                addLog(`↩️ ${p.name} 取消决策，预测押金 ${fmt(pred.amount)} 已退还`, 'event');
+            }
             setAllControlsEnabled(false);
             updateDecisionUI();
             updateCloseMarketButton();
