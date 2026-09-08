@@ -171,6 +171,7 @@
                 stocksHistory = [];
                 logsByRound = {};
                 roundHistory = [];
+                sealedStocks = {};
                 lotteryJackpot = 0;
                 currentDarkHorse = null;
                 marketSentiment = 0.5;

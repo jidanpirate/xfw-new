@@ -33,6 +33,11 @@
                 showBanner('您已破产，无法预测', 'error', null, '🔮 预测失败');
                 return;
             }
+            // v9.3: 被封股票不能预测
+            if (isStockSealed(stockKey)) {
+                showBanner(`${stocks[stockKey].name} 已跑路，无法预测`, 'error', null, '🚫 股票跑路');
+                return;
+            }
             if (predictionsThisRound[playerId]) {
                 showBanner('本轮已进行过预测，每轮限一次', 'warning', null, '🔮 预测失败');
                 return;
@@ -143,6 +148,12 @@
                 showBanner('总资产不足，无法预测（需≥20元）', 'warning', null, '🔮 预测失败');
                 return;
             }
+            // v9.3: 过滤被封股票
+            let availableStocks = Object.keys(stocks).filter(k => !isStockSealed(k));
+            if (availableStocks.length === 0) {
+                showBanner('所有股票均已跑路，无法预测', 'error', null, '🚫 股票跑路');
+                return;
+            }
 
             let overlay = document.createElement('div');
             overlay.style.cssText =
@@ -157,7 +168,7 @@
                     <div style="margin-bottom:10px;">
                         <label style="color:var(--text-secondary);font-size:0.8rem;">选择股票</label>
                         <select id="pred-stock" style="width:100%;padding:8px 12px;background:var(--bg-dark);border:2px solid var(--border-color);color:var(--text-primary);border-radius:8px;font-size:0.95rem;margin-top:4px;">
-                            ${Object.keys(stocks).map(k => `<option value="${k}">${stocks[k].name}</option>`).join('')}
+                            ${availableStocks.map(k => `<option value="${k}">${stocks[k].name}</option>`).join('')}
                         </select>
                     </div>
                     <div style="margin-bottom:10px;">

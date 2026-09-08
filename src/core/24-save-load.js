@@ -35,7 +35,8 @@
                     roundEvents,
                     playerDecisionStatus,
                     BANKRUPTCY_THRESHOLD,
-                    BANKRUPTCY_FUND
+                    BANKRUPTCY_FUND,
+                    sealedStocks
                 };
                 localStorage.setItem('stockGameSave', JSON.stringify(state));
                 if (!auto) showNotification();
@@ -107,6 +108,7 @@
                 }
                 if (state.BANKRUPTCY_THRESHOLD !== undefined) BANKRUPTCY_THRESHOLD = state.BANKRUPTCY_THRESHOLD;
                 if (state.BANKRUPTCY_FUND !== undefined) BANKRUPTCY_FUND = state.BANKRUPTCY_FUND;
+                sealedStocks = state.sealedStocks || {};
                 ADMIN_CONFIG.bankruptcyThreshold = BANKRUPTCY_THRESHOLD;
                 ADMIN_CONFIG.bankruptcyFund = BANKRUPTCY_FUND;
 
@@ -168,7 +170,8 @@
                     roundEvents,
                     playerDecisionStatus,
                     BANKRUPTCY_THRESHOLD,
-                    BANKRUPTCY_FUND
+                    BANKRUPTCY_FUND,
+                    sealedStocks
                 };
                 let json = JSON.stringify(state);
                 let code = btoa(encodeURIComponent(json));
@@ -254,6 +257,7 @@
                 }
                 if (state.BANKRUPTCY_THRESHOLD !== undefined) BANKRUPTCY_THRESHOLD = state.BANKRUPTCY_THRESHOLD;
                 if (state.BANKRUPTCY_FUND !== undefined) BANKRUPTCY_FUND = state.BANKRUPTCY_FUND;
+                sealedStocks = state.sealedStocks || {};
                 ADMIN_CONFIG.bankruptcyThreshold = BANKRUPTCY_THRESHOLD;
                 ADMIN_CONFIG.bankruptcyFund = BANKRUPTCY_FUND;
 
