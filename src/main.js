@@ -38,6 +38,8 @@
         'ui/31-event-bindings.js',
         'ui/32-health-warning.js',
         'ui/33-external-ai-panel.js',
+        'ui/34-round-history.js',
+        'ui/35-expand-charts.js',
     ];
 
     function loadModule(index) {
