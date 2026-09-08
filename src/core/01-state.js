@@ -14,6 +14,8 @@
         let logsByRound = {};
         let allLogsExpanded = true;
         let logPanelVisible = true;
+        // v9.2: 每轮历史快照（用于历史记录面板）
+        let roundHistory = [];
 
         let externalAIConfigs = [];
 
