@@ -270,7 +270,7 @@
                     else playerTypes.push(`${p.name} (真人)`);
                 });
                 addLog(`🚀 新游戏开始！${players.length}位玩家：${playerTypes.join('、')}`, 'highlight');
-                showBanner(`🎂 v9.1 新游戏开始！`, 'success', null, '🚀 游戏启动');
+                showBanner(`🎂 v9.2 新游戏开始！`, 'success', null, '🚀 游戏启动');
                 updateCloseMarketButton();
                 updateEndGameButton();
                 setAllControlsEnabled(false);

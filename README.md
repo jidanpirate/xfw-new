@@ -1,7 +1,7 @@
 
 # 小富翁股票投资游戏
 
-这是一个使用原生 HTML、CSS 和 JavaScript 编写的股票投资模拟游戏，当前版本为 v9.1。
+这是一个使用原生 HTML、CSS 和 JavaScript 编写的股票投资模拟游戏，当前版本为 v9.2。
 
 
 
@@ -35,7 +35,8 @@
 │           ├── 04-buttons.css     # 按钮系统与按钮交互效果
 │           ├── 05-panels.css      # 排行榜、AI 面板、图表、日志、横幅
 │           ├── 06-modals.css      # 成就、通用信息、结果、事件、帮助、存档、密码
-│           └── 07-responsive.css  # 附加样式与响应式布局
+│           ├── 07-responsive.css  # 附加样式与响应式布局
+│           └── 08-features.css    # 历史记录、展开图表、撤销预测等新功能样式
 └── src/
     ├── main.js                    # JavaScript 模块加载器
     ├── core/
@@ -57,13 +58,13 @@
 - `src/utils/`：工具函数与密码验证。
 - `src/config/`：管理员高级设置。
 
-每个 JavaScript 文件保留原有的编号和章节注释，`src/main.js` 按 `01` 到 `33` 的顺序加载它们。
+每个 JavaScript 文件保留原有的编号和章节注释，`src/main.js` 按 `01` 到 `35` 的顺序加载它们。
 
 
 
 ## CSS 维护
 
-HTML 只引用 `assets/css/style.css`。该文件通过 `@import` 按顺序加载 `assets/css/modules/` 下的 7 个样式模块。
+HTML 只引用 `assets/css/style.css`。该文件通过 `@import` 按顺序加载 `assets/css/modules/` 下的 8 个样式模块。
 
 修改样式时，优先根据功能进入对应模块。若修改的是覆盖关系，请注意 `style.css` 中的导入顺序，后加载的规则可能覆盖前面的规则。
 
@@ -83,6 +84,7 @@ HTML 只引用 `assets/css/style.css`。该文件通过 `@import` 按顺序加�
 
 ## 当前版本
 
+- v9.2：修复取消决策后预测押金未回滚的 bug；新增历史记录面板（每轮快照可查）；新增展开图表（玩家/股票迷你涨跌图）；新增预测撤销按钮。
 - v9.1：收盘统一破产检测、破产救助金、直接结束游戏、外接 AI 和模块化目录结构。（这是GitHub上第一个版本）
 
 ### 我们任在不断升级中，欢迎提交issue讨论。
