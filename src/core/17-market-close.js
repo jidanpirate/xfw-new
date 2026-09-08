@@ -187,6 +187,44 @@
                 summary += '\n🏁 **这是最后一轮！** 游戏即将结束！\n';
             }
 
+            // ---- v9.2: 记录本轮历史快照（供历史记录面板使用） ----
+            roundHistory.push({
+                round: round,
+                bankAssets: bankAssets,
+                stocks: Object.keys(stocks).map(k => ({
+                    key: k,
+                    name: stocks[k].name,
+                    price: stocks[k].price,
+                    multiplier: stocks[k].recentMultiplier || 1
+                })),
+                customStocks: customStocks.map(cs => ({
+                    id: cs.id,
+                    name: cs.name,
+                    multiplier: cs.recentMultiplier || 1
+                })),
+                players: players.map(p => ({
+                    id: p.id,
+                    name: p.name,
+                    total: Math.round(p.totalAssets()),
+                    cash: Math.round(p.cash),
+                    isAI: !!p.isAI,
+                    isExternal: !!p.isExternal,
+                    bankrupt: !!p.bankrupt
+                })),
+                darkHorse: darkHorseInfo ? {
+                    active: !!darkHorseInfo.active,
+                    key: darkHorseInfo.key || null,
+                    name: darkHorseInfo.name || null,
+                    multiplier: darkHorseInfo.multiplier || null
+                } : null,
+                events: roundEvents[round] ? {
+                    lotteryWins: (roundEvents[round].lotteryWins || []).slice(),
+                    lotteryScams: (roundEvents[round].lotteryScams || []).slice(),
+                    predictions: (roundEvents[round].predictions || []).slice()
+                } : { lotteryWins: [], lotteryScams: [], predictions: [] }
+            });
+            if (roundHistory.length > 200) roundHistory.shift();
+
             roundEvents[round] = { lotteryWins: [], lotteryScams: [], predictions: [] };
 
             showInfoModal(`📊 第 ${round} 轮收盘`, summary, function() {
