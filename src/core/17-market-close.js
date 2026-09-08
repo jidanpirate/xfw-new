@@ -83,6 +83,11 @@
 
             let finalMults = calcAllMultipliers(eventMult, darkHorseInfo);
 
+            // v9.3: 被封股票涨跌冻结（价格不变）
+            Object.keys(sealedStocks).forEach(k => {
+                if (finalMults[k] !== undefined) finalMults[k] = 1;
+            });
+
             Object.keys(stocks).forEach(k => {
                 let old = stocks[k].value;
                 stocks[k].value = Math.round(stocks[k].value * finalMults[k]);
@@ -232,11 +237,14 @@
                 if (round > totalRounds) {
                     endGame();
                 } else {
+                    // v9.3: 新轮开始时处理封股票（恢复到期的 + 银行告急时50%概率封新的）
+                    processSealsOnNewRound();
                     resetDecisionState();
                     updateUI();
                     updatePlayersDisplay();
                     updateLeaderboard();
                     updateCharts();
+                    updateStockStatus();
                     updateCloseMarketButton();
                     updateEndGameButton();
                     setAllControlsEnabled(false);

@@ -21,6 +21,13 @@
             const ids = { A: 'stock-a-status', B: 'stock-b-status', C: 'stock-c-status', D: 'stock-d-status' };
             Object.keys(ids).forEach(k => {
                 let el = document.getElementById(ids[k]);
+                // v9.3: 被封股票显示跑路状态
+                if (isStockSealed(k)) {
+                    let info = sealedStocks[k];
+                    el.textContent = `🚫 已跑路（第${info.recoverRound}轮恢复）`;
+                    el.style.color = '#ef5350';
+                    return;
+                }
                 let m = stocks[k].recentMultiplier || 1;
                 let pct = ((m - 1) * 100).toFixed(1);
                 let isDark = currentDarkHorse && currentDarkHorse.key === k;
