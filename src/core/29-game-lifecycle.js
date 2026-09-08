@@ -170,6 +170,7 @@
                 assetsHistory = [];
                 stocksHistory = [];
                 logsByRound = {};
+                roundHistory = [];
                 lotteryJackpot = 0;
                 currentDarkHorse = null;
                 marketSentiment = 0.5;
