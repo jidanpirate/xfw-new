@@ -207,6 +207,8 @@
                 <button class="btn btn-warning" id="save-game-btn">💾 保存</button>
                 <button class="btn btn-gold" id="export-code-btn">📋 导出存档码</button>
                 <button class="btn btn-gold" id="import-code-btn">📥 导入存档码</button>
+                <!-- v9.2: 历史记录 -->
+                <button class="btn btn-primary btn-sm" id="history-btn">📜 历史记录</button>
                 <button class="btn btn-outline" id="new-game-btn">🔄 新游戏</button>
                 <button class="btn btn-primary btn-sm" id="help-btn">❓ 帮助</button>
             </div>
@@ -220,6 +222,10 @@
                     <div class="section-header"><div class="section-title">📉 股票涨跌</div></div>
                     <canvas id="stocks-chart"></canvas>
                 </div>
+            </div>
+            <!-- v9.2: 展开图表按钮（查看每个玩家/每只股票的涨跌图） -->
+            <div class="expand-charts-row">
+                <button class="btn btn-gold btn-sm" id="expand-charts-btn">📊 展开图表 · 查看每个玩家/股票的涨跌图</button>
             </div>
         </div>
 
@@ -447,6 +453,33 @@
         </div>
     </div>
 
+    <!-- ===== 历史记录模态框 (v9.2) ===== -->
+    <div class="history-modal" id="history-modal">
+        <div class="history-content">
+            <div class="section-header">
+                <div class="section-title">📜 历史记录</div>
+                <button class="btn btn-warning btn-sm" id="history-close-btn">关闭</button>
+            </div>
+            <div id="history-summary" class="history-summary"></div>
+            <div id="history-list" class="history-list"></div>
+        </div>
+    </div>
+
+    <!-- ===== 展开图表总览 (v9.2) ===== -->
+    <div class="expand-overlay" id="expand-overlay">
+        <div class="expand-content">
+            <div class="section-header">
+                <div class="section-title">📊 图表总览</div>
+                <div style="display:flex; gap:6px; flex-wrap:wrap;">
+                    <button class="btn btn-primary btn-sm expand-tab active" data-tab="players">👤 玩家涨跌</button>
+                    <button class="btn btn-primary btn-sm expand-tab" data-tab="stocks">📈 股票涨跌</button>
+                    <button class="btn btn-warning btn-sm" id="expand-close-btn">✕ 关闭</button>
+                </div>
+            </div>
+            <div class="expand-grid" id="expand-grid"></div>
+        </div>
+    </div>
+
     <!-- ================================================================
     JavaScript  —  v9.1 增强版
     核心改动：
@@ -458,6 +491,15 @@
       6. 【v9.1】帮助内容隐藏高级设置相关
       7. 【v9.1】保留 :before 和 :hover 效果
       8. 代码添加详细注释，方便后续 AI 维护
+      9. 所有 UI 自定义，无系统弹窗，适配移动端
+    ================================================================
+    v9.2 新增：
+      1. 修复：取消决策时回滚本轮预测（退还押金、清除记录），
+         并新增「撤销预测」按钮，解决取消后无法再次预测/决策的问题
+      2. 新增历史记录面板：每轮收盘时记录快照（股价/资产/事件），
+         可通过「历史记录」按钮查看
+      3. 新增「展开图表」：在图表下方按钮进入，查看每个玩家
+         与每只股票的涨跌走势图
       9. 所有 UI 自定义，无系统弹窗，适配移动端
     ================================================================ -->
     <script src="src/main.js"></script>
